@@ -1,5 +1,10 @@
 {
   "itemGroup.examplemod": "Example Mod Tab",
+  "itemGroup.examplemod2": "Example Mod Tab 2",
+
   "block.examplemod.example_block": "Example Block",
+  "block.examplemod.example_block_2": "Example Block 2",
+
   "item.examplemod.example_item": "Example Item"
+
 }
