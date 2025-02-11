@@ -1,10 +1,14 @@
 {
   "itemGroup.examplemod": "Example Mod Tab",
   "itemGroup.examplemod2": "Example Mod Tab 2",
+  "itemGroup.mod_objects_tab": "Mod objects",
 
   "block.examplemod.example_block": "Example Block",
   "block.examplemod.example_block_2": "Example Block 2",
+  "block.examplemod.meteorite_block": "Meteorite Block",
+  "block.examplemod.meteorite": "Meteorite",
 
-  "item.examplemod.example_item": "Example Item"
+  "item.examplemod.example_item": "Example Item",
+  "item.examplemod.meteorite_block": "Meteorite Block"
 
 }

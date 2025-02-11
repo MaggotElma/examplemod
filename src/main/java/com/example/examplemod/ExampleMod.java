@@ -1,5 +1,6 @@
 package com.example.examplemod;
 
+import com.nimbusds.jose.util.Resource;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
@@ -42,40 +43,27 @@ public class ExampleMod
     public static final String MODID = "examplemod";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
+    // BLOCKS register
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-    // Create a Deferred Register to hold Items which will all be registered under the "examplemod" namespace
+    // ITEMS register
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
-    // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "examplemod" namespace
+    // CREATIVE_MOD_TABS register
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
-    // Creates a new Block with the id "examplemod:example_block", combining the namespace and path
-    public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
-    public static final DeferredBlock<Block> EXAMPLE_BLOCK_2 = BLOCKS.registerSimpleBlock("example_block_2", BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.parse("examplemod:block/example_block_2"))));
 
-    // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
-    public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = ITEMS.registerSimpleBlockItem("example_block", EXAMPLE_BLOCK);
-    public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_2_ITEM = ITEMS.registerSimpleBlockItem("example_block_2", EXAMPLE_BLOCK_2);
+    // METEORITE block
+    public static final DeferredBlock<Block> METEORITE_BLOCK = BLOCKS.registerSimpleBlock("meteorite_block", BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.parse("examplemod:meteorite_block"))));
+    // METEORITE_BLOCK_ITEM item
+    public static final DeferredItem<BlockItem> METEORITE_BLOCK_ITEM = ITEMS.register("meteorite_block", () -> new BlockItem(METEORITE_BLOCK.get(), new BlockItem.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:meteorite_block")))));
 
-    // Creates a new food item with the id "examplemod:example_id", nutrition 1 and saturation 2
-    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
 
-    // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.examplemod")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> EXAMPLE_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(EXAMPLE_ITEM.get());// Add the example item to the tab. For your own tabs, this method is preferred over the event
-            }).build());
-
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB_2 = CREATIVE_MODE_TABS.register("example_tab_2", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.examplemod2"))
+    // MOD_OBJECTS_TAB tab
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MOD_OBJECTS_TAB = CREATIVE_MODE_TABS.register("mod_objects_tab", () -> CreativeModeTab.builder()
+            .title(Component.translatable("itemGroup.mod_objects_tab"))
             .withTabsBefore(CreativeModeTabs.BUILDING_BLOCKS)
-            .icon(() -> EXAMPLE_BLOCK_2_ITEM.get().getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(EXAMPLE_BLOCK_2_ITEM.get());
+            .icon(() -> METEORITE_BLOCK_ITEM.get().getDefaultInstance())
+            .displayItems((parameters, output ) -> {
+                output.accept(METEORITE_BLOCK_ITEM.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -102,6 +90,8 @@ public class ExampleMod
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -121,7 +111,7 @@ public class ExampleMod
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.accept(EXAMPLE_BLOCK_ITEM);
+            //event.accept(EXAMPLE_BLOCK_ITEM);
         }
     }
 
