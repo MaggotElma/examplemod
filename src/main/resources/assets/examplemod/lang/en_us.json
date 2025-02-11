@@ -9,6 +9,7 @@
   "block.examplemod.meteorite": "Meteorite",
 
   "item.examplemod.example_item": "Example Item",
-  "item.examplemod.meteorite_block": "Meteorite Block"
+  "item.examplemod.meteorite_block": "Meteorite Block",
+  "item.examplemod.meteorite_dust": "Meteorite Dust"
 
 }

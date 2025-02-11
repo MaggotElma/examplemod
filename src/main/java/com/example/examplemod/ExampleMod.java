@@ -1,6 +1,5 @@
 package com.example.examplemod;
 
-import com.nimbusds.jose.util.Resource;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
@@ -11,7 +10,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -19,7 +17,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.MapColor;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -53,8 +50,10 @@ public class ExampleMod
 
     // METEORITE block
     public static final DeferredBlock<Block> METEORITE_BLOCK = BLOCKS.registerSimpleBlock("meteorite_block", BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.parse("examplemod:meteorite_block"))));
-    // METEORITE_BLOCK_ITEM item
+    // METEORITE_BLOCK_ITEM block item
     public static final DeferredItem<BlockItem> METEORITE_BLOCK_ITEM = ITEMS.register("meteorite_block", () -> new BlockItem(METEORITE_BLOCK.get(), new BlockItem.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:meteorite_block")))));
+    // METEORITE_ORE_ITEM item
+    public static final DeferredItem<Item> METEORITE_DUST_ITEM = ITEMS.register("meteorite_dust", () -> new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:meteorite_dust")))));
 
 
     // MOD_OBJECTS_TAB tab
@@ -64,6 +63,7 @@ public class ExampleMod
             .icon(() -> METEORITE_BLOCK_ITEM.get().getDefaultInstance())
             .displayItems((parameters, output ) -> {
                 output.accept(METEORITE_BLOCK_ITEM.get());
+                output.accept(METEORITE_DUST_ITEM.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
