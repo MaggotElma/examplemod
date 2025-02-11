@@ -2,6 +2,7 @@ package com.example.examplemod;
 
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.SoundType;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -49,7 +50,7 @@ public class ExampleMod
 
 
     // METEORITE block
-    public static final DeferredBlock<Block> METEORITE_BLOCK = BLOCKS.registerSimpleBlock("meteorite_block", BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.parse("examplemod:meteorite_block"))));
+    public static final DeferredBlock<Block> METEORITE_BLOCK = BLOCKS.registerSimpleBlock("meteorite_block", BlockBehaviour.Properties.of().setId(ResourceKey.create(Registries.BLOCK, ResourceLocation.parse("examplemod:meteorite_block"))).strength(3f).requiresCorrectToolForDrops().sound(SoundType.STONE));
     // METEORITE_BLOCK_ITEM block item
     public static final DeferredItem<BlockItem> METEORITE_BLOCK_ITEM = ITEMS.register("meteorite_block", () -> new BlockItem(METEORITE_BLOCK.get(), new BlockItem.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:meteorite_block")))));
     // METEORITE_ORE_ITEM item
