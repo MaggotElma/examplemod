@@ -1,5 +1,6 @@
 package com.example.examplemod;
 
+import com.example.examplemod.item.custom.DestroyerItem;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.SoundType;
@@ -55,6 +56,8 @@ public class ExampleMod
     public static final DeferredItem<BlockItem> METEORITE_BLOCK_ITEM = ITEMS.register("meteorite_block", () -> new BlockItem(METEORITE_BLOCK.get(), new BlockItem.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:meteorite_block")))));
     // METEORITE_ORE_ITEM item
     public static final DeferredItem<Item> METEORITE_DUST_ITEM = ITEMS.register("meteorite_dust", () -> new Item(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:meteorite_dust")))));
+    // DESTROYER_ITEM item
+    public static final DeferredItem<Item> DESTROYER_ITEM = ITEMS.register("destroyer", () -> new DestroyerItem(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:destroyer"))).durability(10)));
 
 
     // MOD_OBJECTS_TAB tab
@@ -65,6 +68,7 @@ public class ExampleMod
             .displayItems((parameters, output ) -> {
                 output.accept(METEORITE_BLOCK_ITEM.get());
                 output.accept(METEORITE_DUST_ITEM.get());
+                output.accept(DESTROYER_ITEM.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
