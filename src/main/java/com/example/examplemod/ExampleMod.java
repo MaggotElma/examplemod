@@ -1,8 +1,10 @@
 package com.example.examplemod;
 
 import com.example.examplemod.item.custom.DestroyerItem;
+import com.nimbusds.jose.util.Resource;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.level.block.SoundType;
 import org.slf4j.Logger;
 
@@ -59,6 +61,9 @@ public class ExampleMod
     // DESTROYER_ITEM item
     public static final DeferredItem<Item> DESTROYER_ITEM = ITEMS.register("destroyer", () -> new DestroyerItem(new Item.Properties().setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:destroyer"))).durability(10)));
 
+    // TEST_FOOD food
+    public static final DeferredItem<Item> GREEN_APPLE_FOOD_ITEM = ITEMS.register("green_apple", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().nutrition(10).saturationModifier(0f).alwaysEdible().build()).setId(ResourceKey.create(Registries.ITEM, ResourceLocation.parse("examplemod:green_apple")))));
+
 
     // MOD_OBJECTS_TAB tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MOD_OBJECTS_TAB = CREATIVE_MODE_TABS.register("mod_objects_tab", () -> CreativeModeTab.builder()
@@ -69,6 +74,7 @@ public class ExampleMod
                 output.accept(METEORITE_BLOCK_ITEM.get());
                 output.accept(METEORITE_DUST_ITEM.get());
                 output.accept(DESTROYER_ITEM.get());
+                output.accept(GREEN_APPLE_FOOD_ITEM.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
